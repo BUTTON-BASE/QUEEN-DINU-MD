@@ -1,8 +1,8 @@
 {
-  "name": "DNX-MD",
+  "name": "QUEEN-DINU-MD",
   "description": "Javascript WhatsApp bot made by ALI",
-  "logo": "https://cdn.ironman.my.id/i/2du3i5.jpg",
-  "keywords": ["DNX-MD"],
+  "logo": "https://i.ibb.co/p6MNQwdW/SulaMd.jpg",
+  "keywords": ["QUEEN-DINU-MD"],
   "success_url": "/",
 
     "stack": "container",
@@ -16,7 +16,7 @@
     "STICKER_NAME": {
       "description": "type your sticker pack name.",
       "required": false,
-      "value": "𓆩ု᪳DNX-MDှ᪳𓆪"
+      "value": "QUEEN-DINU-MD𓆪"
     }, 
       
     "PREFIX": {
@@ -79,21 +79,21 @@
     "AUTO_STATUS_MSG": {
       "description": "Type custom message on status reply",
       "required": true,
-      "value": "*JUST NOW YOUR STATUS SEEN BY DNX-MD 🤍👻*"
+      "value": "*JUST NOW YOUR STATUS SEEN BY QUEEN-DINU-MD 🤍👻*"
    
      }, 
 
     "BOT_NAME": {
       "description": "Type here the bot name.",
       "required": false,
-      "value": "𓆩ု᪳DNX-MDှ᪳𓆪"
+      "value": "QUEEN-DINU-MD"
 
       }, 
     
     "ALIVE_IMG": {
       "description": "put here the bot Menu url if you don't have you can use this public url.",
       "required": true,
-      "value": "https://cdn.ironman.my.id/i/2du3i5.jpg" 
+      "value": "https://i.ibb.co/QvPjK5QW/SulaMd.jpg" 
       },
 
     "ANTI_LINK": {
