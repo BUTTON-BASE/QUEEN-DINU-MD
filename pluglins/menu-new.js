@@ -5,7 +5,7 @@ const axios = require('axios');
 
 cmd({
     pattern: "menu",
-    desc: "Show interactive menu system",
+    desc: "Show interactive menu system with buttons",
     category: "menu",
     react: "🧾",
     filename: __filename
@@ -33,30 +33,15 @@ cmd({
 ┃📝 *CODER & TEM RUKSHAN*
 ┗━━━━━━━━━━━━━━━
 
-
 ┏━━━━❮QUEEN DINU MINE COMMAND ❯━━━━
 ┃ 
 ┃ ⛩️  *මෙම කමාන්ඩ් ලිස්ටෙක දිනෙන් දින අලුත් වෙන බැවින් චැනල් එකත් සමග සම්බන්ධව සිටින්න*
 ┃
-┃  ⛩️ _Fallow Channel :- https://whatsapp.com/channel/0029VbAWWH9BFLgRMCXVlU38_
+┃  ⛩️ _Follow Channel :- https://whatsapp.com/channel/0029VbAWWH9BFLgRMCXVlU38_
 ┃
 ┗━━━━━━━━━━━━━━━
 
-╭━━〔 *Menu List* 〕━━┈⊷
-┃◈╭─────────────·๏
-┃◈│1️⃣  ⛩️ *Download Menu*
-┃◈│2️⃣  ⛩️ *Group Menu*
-┃◈│3️⃣  ⛩️ *Fun Menu*
-┃◈│4️⃣  ⛩️ *Owner Menu*
-┃◈│5️⃣  ⛩️ *AI Menu*
-┃◈│6️⃣  ⛩️ *Anime Menu*
-┃◈│7️⃣  ⛩️ *Convert Menu*
-┃◈│8️⃣  ⛩️ *Other Menu*
-┃◈│9️⃣  ⛩️ *Reactions Menu*
-┃◈│🔟  ⛩️  *Main Menu*
-┃◈│11   ⛩️ *MINE COMMAND*
-┃◈╰───────────┈⊷
-╰──────────────┈⊷
+> *Select a menu using the button below!* 🎯
 > ${config.DESCRIPTION}`;
 
         const contextInfo = {
@@ -67,73 +52,56 @@ cmd({
                 newsletterJid: '120363401755639074@newsletter',
                 newsletterName: config.OWNER_NAME,
                 serverMessageId: 143
+            },
+            externalAdReply: {
+                title: `${config.BOT_NAME} Menu`,
+                body: "Explore all features!",
+                thumbnailUrl: config.MENU_IMAGE_URL || 'https://i.ibb.co/YFxFYmvC/5579.jpg',
+                sourceUrl: 'https://whatsapp.com/channel/0029VbAWWH9BFLgRMCXVlU38'
             }
         };
 
-        // Function to send menu image with timeout
-        const sendMenuImage = async () => {
-            try {
-                return await conn.sendMessage(
-                    from,
-                    {
-                        image: { url: config.MENU_IMAGE_URL || 'https://i.ibb.co/YFxFYmvC/5579.jpg' },
-                        caption: menuCaption,
-                        contextInfo: contextInfo
-                    },
-                    { quoted: mek }
-                );
-            } catch (e) {
-                console.log('Image send failed, falling back to text');
-                return await conn.sendMessage(
-                    from,
-                    { text: menuCaption, contextInfo: contextInfo },
-                    { quoted: mek }
-                );
-            }
-        };
+        // Send menu with "SELECT MENU" button
+        const sentMsg = await conn.sendMessage(from, {
+            image: { url: config.MENU_IMAGE_URL || 'https://i.ibb.co/YFxFYmvC/5579.jpg' },
+            caption: menuCaption,
+            footer: "QUEEN-DINU-MD | Powered by LOD TEM 💖",
+            templateButtons: [
+                {
+                    index: 1,
+                    quickReplyButton: {
+                        displayText: "📋 SELECT MENU",
+                        id: "select_menu"
+                    }
+                },
+                {
+                    index: 2,
+                    quickReplyButton: {
+                        displayText: "🏓 BOT PING",
+                        id: "bot_ping"
+                    }
+                },
+                {
+                    index: 3,
+                    quickReplyButton: {
+                        displayText: "⚙️ BOT SYSTEM",
+                        id: "bot_system"
+                    }
+                },
+                {
+                    index: 4,
+                    quickReplyButton: {
+                        displayText: "🌟 BOT ALIVE",
+                        id: "bot_alive"
+                    }
+                }
+            ],
+            contextInfo: contextInfo
+        }, { quoted: mek });
 
-        // Function to send menu audio with timeout
-        const sendMenuAudio = async () => {
-            try {
-                await new Promise(resolve => setTimeout(resolve, 1000)); // Small delay after image
-                await conn.sendMessage(from, {
-                    audio: { url: 'https://files.catbox.moe/xw4256.mp3' },
-                    mimetype: 'audio/mp4',
-                    ptt: true,
-                }, { quoted: mek });
-            } catch (e) {
-                console.log('Audio send failed, continuing without it');
-            }
-        };
-
-        // Send image first, then audio sequentially
-        let sentMsg;
-        try {
-            // Send image with 10s timeout
-            sentMsg = await Promise.race([
-                sendMenuImage(),
-                new Promise((_, reject) => setTimeout(() => reject(new Error('Image send timeout')), 10000))
-            ]);
-            
-            // Then send audio with 1s delay and 8s timeout
-            await Promise.race([
-                sendMenuAudio(),
-                new Promise((_, reject) => setTimeout(() => reject(new Error('Audio send timeout')), 8000))
-            ]);
-        } catch (e) {
-            console.log('Menu send error:', e);
-            if (!sentMsg) {
-                sentMsg = await conn.sendMessage(
-                    from,
-                    { text: menuCaption, contextInfo: contextInfo },
-                    { quoted: mek }
-                );
-            }
-        }
-        
         const messageID = sentMsg.key.id;
 
-        // Menu data (complete version)
+        // Menu data (same as your original, shortened for brevity)
         const menuData = {
             '1': {
                 title: "📥 *Download Menu* 📥",
@@ -247,7 +215,7 @@ cmd({
 ┃★│ • restart
 ┃★│ • shutdown
 ┃★│ • updatecmd
-┃★╰───────────���──
+┃★╰──────────────
 ┃★╭──────────────
 ┃★│ ℹ️ *Info Tools*
 ┃★│ • gjid
@@ -438,99 +406,97 @@ cmd({
 ┃✨  .mn
 ┗━━━━━━━━━━━━━━━
 
-
 ┏━━━━❮SOLO LEVELING MINE COMMAND ❯━━━━
 ┃ 
 ┃ ⛩️  *මෙම කමාන්ඩ් ලිස්ටෙක දිනෙන් දින අලුත් වෙන බැවින් චැනල්     එකත් සමග සම්බන්ධව සිටින්න⚠*
 ┃
-┃  ⛩️ _Fallow Channel :- https://whatsapp.com/channel/0029VbAWWH9BFLgRMCXVlU38_
+┃  ⛩️ _Follow Channel :- https://whatsapp.com/channel/0029VbAWWH9BFLgRMCXVlU38_
 ┃
-┃ 
-┗━━━━━━━━━━━━━━━`
+┗━━━━━━━━━━━━━━━`,
+                image: true
+            }
         };
 
-        // Message handler with improved error handling
-        const handler = async (msgData) => {
+        // Button handler for "SELECT MENU", "BOT PING", "BOT SYSTEM", "BOT ALIVE"
+        const buttonHandler = async (msgData) => {
             try {
                 const receivedMsg = msgData.messages[0];
                 if (!receivedMsg?.message || !receivedMsg.key?.remoteJid) return;
 
-                const isReplyToMenu = receivedMsg.message.extendedTextMessage?.contextInfo?.stanzaId === messageID;
-                
-                if (isReplyToMenu) {
-                    const receivedText = receivedMsg.message.conversation || 
-                                      receivedMsg.message.extendedTextMessage?.text;
+                const isReplyToMenu = receivedMsg.message?.extendedTextMessage?.contextInfo?.stanzaId === messageID;
+                const buttonId = receivedMsg.message?.buttonsResponseMessage?.selectedButtonId;
+
+                if (isReplyToMenu || buttonId) {
                     const senderID = receivedMsg.key.remoteJid;
 
-                    if (menuData[receivedText]) {
-                        const selectedMenu = menuData[receivedText];
-                        
-                        try {
-                            if (selectedMenu.image) {
-                                await conn.sendMessage(
-                                    senderID,
-                                    {
-                                        image: { url: config.MENU_IMAGE_URL || 'https://i.ibb.co/YFxFYmvC/5579.jpg' },
-                                        caption: selectedMenu.content,
-                                        contextInfo: contextInfo
-                                    },
-                                    { quoted: receivedMsg }
-                                );
-                            } else {
-                                await conn.sendMessage(
-                                    senderID,
-                                    { text: selectedMenu.content, contextInfo: contextInfo },
-                                    { quoted: receivedMsg }
-                                );
-                            }
-
+                    if (buttonId === "select_menu") {
+                        // Show menu selection buttons
+                        await conn.sendMessage(senderID, {
+                            text: `📋 *SELECT MENU* 📋\n\n` +
+                                  `┃◈│1️⃣  ⛩️ *Download Menu*\n` +
+                                  `┃◈│2️⃣  ⛩️ *Group Menu*\n` +
+                                  `┃◈│3️⃣  ⛩️ *Fun Menu*\n` +
+                                  `┃◈│4️⃣  ⛩️ *Owner Menu*\n` +
+                                  `┃◈│5️⃣  ⛩️ *AI Menu*\n` +
+                                  `┃◈│6️⃣  ⛩️ *Anime Menu*\n` +
+                                  `┃◈│7️⃣  ⛩️ *Convert Menu*\n` +
+                                  `┃◈│8️⃣  ⛩️ *Other Menu*\n` +
+                                  `┃◈│9️⃣  ⛩️ *Reactions Menu*\n` +
+                                  `┃◈│🔟  ⛩️ *Main Menu*\n` +
+                                  `┃◈│11   ⛩️ *MINE COMMAND*\n\n` +
+                                  `> *Tap a button to explore!* 🎯`,
+                            footer: "QUEEN-DINU-MD | Powered by DNX-MD 💖",
+                            templateButtons: [
+                                { index: 1, quickReplyButton: { displayText: "1️⃣ Download", id: "menu_1" } },
+                                { index: 2, quickReplyButton: { displayText: "2️⃣ Group", id: "menu_2" } },
+                                { index: 3, quickReplyButton: { displayText: "3️⃣ Fun", id: "menu_3" } },
+                                { index: 4, quickReplyButton: { displayText: "4️⃣ Owner", id: "menu_4" } },
+                                { index: 5, quickReplyButton: { displayText: "5️⃣ AI", id: "menu_5" } },
+                                { index: 6, quickReplyButton: { displayText: "6️⃣ Anime", id: "menu_6" } },
+                                { index: 7, quickReplyButton: { displayText: "7️⃣ Convert", id: "menu_7" } },
+                                { index: 8, quickReplyButton: { displayText: "8️⃣ Other", id: "menu_8" } },
+                                { index: 9, quickReplyButton: { displayText: "9️⃣ Reactions", id: "menu_9" } },
+                                { index: 10, quickReplyButton: { displayText: "🔟 Main", id: "menu_10" } },
+                                { index: 11, quickReplyButton: { displayText: "11 MINE", id: "menu_11" } }
+                            ],
+                            contextInfo: contextInfo
+                        }, { quoted: receivedMsg });
+                    } else if (buttonId === "bot_ping") {
+                        await conn.sendMessage(senderID, { text: `*🏓 Triggering BOT PING...*` }, { quoted: receivedMsg });
+                        await conn.invoke('ping', mek, m, { from, reply });
+                    } else if (buttonId === "bot_system") {
+                        await conn.sendMessage(senderID, { text: `*⚙️ Triggering BOT SYSTEM...*` }, { quoted: receivedMsg });
+                        await conn.invoke('system', mek, m, { from, reply });
+                    } else if (buttonId === "bot_alive") {
+                        await conn.sendMessage(senderID, { text: `*🌟 Triggering BOT ALIVE...*` }, { quoted: receivedMsg });
+                        await conn.invoke('alive', mek, m, { from, reply });
+                    } else if (buttonId?.startsWith("menu_")) {
+                        const menuNumber = buttonId.replace("menu_", "");
+                        const selectedMenu = menuData[menuNumber];
+                        if (selectedMenu) {
                             await conn.sendMessage(senderID, {
-                                react: { text: '✅', key: receivedMsg.key }
-                            });
-
-                        } catch (e) {
-                            console.log('Menu reply error:', e);
-                            await conn.sendMessage(
-                                senderID,
-                                { text: selectedMenu.content, contextInfo: contextInfo },
-                                { quoted: receivedMsg }
-                            );
-                        }
-
-                    } else {
-                        await conn.sendMessage(
-                            senderID,
-                            {
-                                text: `❌ *Invalid Option!* ❌\n\nPlease reply with a number between 1-10 to select a menu.\n\n*Example:* Reply with "1" for Download Menu\n\n> ${config.DESCRIPTION}`,
+                                image: selectedMenu.image ? { url: config.MENU_IMAGE_URL || 'https://i.ibb.co/YFxFYmvC/5579.jpg' } : undefined,
+                                caption: selectedMenu.content,
                                 contextInfo: contextInfo
-                            },
-                            { quoted: receivedMsg }
-                        );
+                            }, { quoted: receivedMsg });
+                        }
                     }
                 }
             } catch (e) {
-                console.log('Handler error:', e);
+                console.log('Button handler error:', e);
             }
         };
 
-        // Add listener
-        conn.ev.on("messages.upsert", handler);
+        // Add listener for button responses
+        conn.ev.on("messages.upsert", buttonHandler);
 
         // Remove listener after 5 minutes
         setTimeout(() => {
-            conn.ev.off("messages.upsert", handler);
+            conn.ev.off("messages.upsert", buttonHandler);
         }, 300000);
 
     } catch (e) {
         console.error('Menu Error:', e);
-        try {
-            await conn.sendMessage(
-                from,
-                { text: `❌ Menu system is currently busy. Please try again later.\n\n> ${config.DESCRIPTION}` },
-                { quoted: mek }
-            );
-        } catch (finalError) {
-            console.log('Final error handling failed:', finalError);
-        }
+        await conn.sendMessage(from, { text: `❌ Menu system is currently busy. Please try again later.\n\n> ${config.DESCRIPTION}` }, { quoted: mek });
     }
 });
